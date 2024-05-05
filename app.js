@@ -29,6 +29,12 @@ app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-
 app.use(bodyParser.json()); // parse application/json
 app.use(cookieParser());
 
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static(__dirname + '/public'));
+
+// Serve static content for the game from the "Game" directory.
+app.use('/game', express.static(__dirname + '/Game'));
+
 // require passport auth
 require('./auth/auth');
 
