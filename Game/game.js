@@ -33,7 +33,8 @@ function preload() {
   // load the Spike image separately for Phaser 3 to render it
   this.load.image('spike', 'assets/images/spike.png');
 
-  this.load.image('voda', 'assets/images/spike.png');
+  this.load.image('voda', 'assets/images/voda.png');
+
   // Load the export Tiled JSON
   this.load.tilemapTiledJSON('map', 'assets/tilemaps/level1.json');
   // Load player animations from the player spritesheet and atlas JSON
@@ -54,6 +55,7 @@ function create() {
   // Add the platform layer as a static group, the player would be able
   // to jump on platforms like world collisions but they shouldn't move
   const platforms = map.createStaticLayer('Platforms', tileset, 0, 200);
+  const Water = map.createStaticLayer('Water', tileset, 0, 200);
   // There are many ways to set collision between tiles and players
   // As we want players to collide with all of the platforms, we tell Phaser to
   // set collisions for every tile in our platform layer whose index isn't -1.
