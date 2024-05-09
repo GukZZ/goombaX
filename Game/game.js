@@ -1,11 +1,10 @@
 const config = {
   type: Phaser.AUTO,
   parent: 'game',
-  width: 800,
+  width: 3600,
   heigth: 640,
   scale: {
-    mode: Phaser.Scale.RESIZE,
-    autoCenter: Phaser.Scale.CENTER_BOTH
+
   },
   scene: {
     preload,
