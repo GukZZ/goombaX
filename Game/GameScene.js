@@ -17,9 +17,6 @@ class GameScene extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
     this.physics.add.collider(this.player, platforms);
   
-    // Camera setup to follow the player
-    this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
-    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
   
     // Ensure the player is active and controllable
     this.cursors = this.input.keyboard.createCursorKeys();
