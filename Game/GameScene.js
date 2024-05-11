@@ -1,6 +1,6 @@
-class MainScene extends Phaser.Scene {
+class GameScene extends Phaser.Scene {
   constructor() {
-    super('MainScene');
+    super('GameScene');
   }
   
   create() {
@@ -16,8 +16,13 @@ class MainScene extends Phaser.Scene {
     this.player.setBounce(0.1);
     this.player.setCollideWorldBounds(true);
     this.physics.add.collider(this.player, platforms);
+  
+    // Camera setup to follow the player
     this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
-    this.cameras.main.setBounds(0, 0, 3600, 640);
+    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+  
+    // Ensure the player is active and controllable
+    this.cursors = this.input.keyboard.createCursorKeys();
 
     this.anims.create({
       key: 'walk',
@@ -42,7 +47,7 @@ class MainScene extends Phaser.Scene {
       frameRate: 10,
     });
 
-    this.cursors = this.input.keyboard.createCursorKeys();
+
 
     this.spikes = this.physics.add.group({
       allowGravity: false,
@@ -59,16 +64,14 @@ class MainScene extends Phaser.Scene {
       spikeSprite.body.setSize(spike.width, spike.height - 20).setOffset(0, 20);
     });
     
-    this.physics.add.collider(this.player, this.spikes, playerHit, null, this);
+    this.physics.add.collider(this.player, this.spikes, this.playerHit.bind(this), null, this);
 
     map.getObjectLayer('voda').objects.forEach((voda) => {
       const vodaSprite = this.voda.create(voda.x, voda.y + 200 - voda.height, 'voda').setOrigin(0);
       vodaSprite.body.setSize(voda.width, voda.height - 20).setOffset(0, 20);
     });
 
-    this.physics.add.collider(this.player, this.voda, playerHit, null, this);
-    this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
-    this.cameras.main.setBounds(0, 0, 3600, 640);
+    this.physics.add.collider(this.player, this.voda, this.playerHit.bind(this), null, this);
   }
   
     update() {
@@ -90,6 +93,8 @@ class MainScene extends Phaser.Scene {
             this.player.play('jump', true);
         }
     }
+
+    
     playerHit(player, spike) {
         // Обработка столкновения игрока с опасным объектом
         player.setVelocity(0, 0);

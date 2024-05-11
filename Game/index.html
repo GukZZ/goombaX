@@ -11,8 +11,6 @@
     }
     #game {
       display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
       background-color: #000;
     }
@@ -20,13 +18,10 @@
 </head>
 <body>
   <div id="game"></div>
-  <div id="PreloadScene"></div>
-  <div id="MainScene"></div> 
   <!-- Phaser library -->
-  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.min.js"></script>
   <!-- Game scripts -->
-  <script src="PreloadScene.js"></script>
-  <script src="GameScene.js"></script>
-  <script src="game.js"></script>
-</body>
+  <script src="./PreloadScene.js"></script>
+  <script src="./GameScene.js"></script>
+  <script src="./game.js"></script>
 </html>
