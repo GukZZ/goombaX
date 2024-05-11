@@ -24,26 +24,34 @@
     <a href="/index.html">Already have an account? Login here.</a>
   </form>
   <script>
-    function signUp() {
-      var data = {
+   function signUp() {
+    var password = document.forms[0].elements[1].value;
+    if (password.length < 6) {
+        window.alert("Пароль должен содержать не менее 6 символов.");
+        return; // Выход из функции, если пароль не удовлетворяет условию
+    }
+
+    var data = {
         email: document.forms[0].elements[0].value,
-        password: document.forms[0].elements[1].value,
+        password: password,
         name: document.forms[0].elements[2].value
-      };
-      $.ajax({
+    };
+
+    $.ajax({
         type: 'POST',
         url: '/signup',
         data,
         success: function (data) {
-          window.alert('user created successfully');
-          window.location.replace('/index.html');
+            window.alert('Пользователь успешно создан.');
+            window.location.replace('/index.html');
         },
         error: function (xhr) {
-          window.alert(JSON.stringify(xhr));
-          window.location.replace('/signup.html');
+            window.alert(JSON.stringify(xhr));
+            window.location.replace('/signup.html');
         }
-      });
-    }
+    });
+}
+
   </script>
 </body>
 

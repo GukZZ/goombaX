@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Leaderboard</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.min.js"></script>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+  <title>Achievements</title>
+</head>
+<body>
+    <h1>Achievements</h1>
+    <script src="./models/Achievement.js"></script>
+    <script>
+    $(document).ready(function() {
+      achievements.forEach(function(achievement) {
+        $('body').append(
+          `<div>
+            <h2>${achievement.name}</h2>
+            <p>${achievement.description}</p>
+            <p>Статус: ${achievement.achieved ? "Получено" : "Не получено"}</p>
+          </div>`
+        );
+      });
+    });
+    </script>
+</body>
+</html>
