@@ -16,6 +16,8 @@ class GameScene extends Phaser.Scene {
     this.player.setBounce(0.1);
     this.player.setCollideWorldBounds(true);
     this.physics.add.collider(this.player, platforms);
+    
+    this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
   
   
     // Ensure the player is active and controllable
