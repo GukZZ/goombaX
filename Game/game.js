@@ -9,7 +9,7 @@ const config = {
           gravity: { y: 500 }
       }
   },
-  scene: [PreloadScene, GameScene]
+  scene: [PreloadScene, GameScene, NextLevel]
 };
 
 const game = new Phaser.Game(config);

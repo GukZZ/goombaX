@@ -58,6 +58,11 @@ class GameScene extends Phaser.Scene {
       immovable: true
     });
 
+    this.endLevel = this.physics.add.group({
+      allowGravity: false,
+      immovable: true
+    });
+
     map.getObjectLayer('Spikes').objects.forEach((spike) => {
       const spikeSprite = this.spikes.create(spike.x, spike.y + 200 - spike.height, 'spike').setOrigin(0);
       spikeSprite.body.setSize(spike.width, spike.height - 20).setOffset(0, 20);
@@ -71,6 +76,17 @@ class GameScene extends Phaser.Scene {
     });
 
     this.physics.add.collider(this.player, this.voda, this.playerHit.bind(this), null, this);
+
+
+
+    map.getObjectLayer('endLevel').objects.forEach((endLevel) => {
+      const endLevelSprite = this.endLevel.create(endLevel.x, endLevel.y + 200 - endLevel.height, 'endLevel').setOrigin(0);
+      endLevelSprite.body.setSize(endLevel.width, endLevel.height).setOffset(0, 20);
+
+    });
+    
+    this.physics.add.collider(this.player, this.endLevel, this.onLevelComplete.bind(this), null, this);
+
   }
   
     update() {
@@ -110,6 +126,10 @@ class GameScene extends Phaser.Scene {
             ease: 'Linear',
             repeat: 5,
         });
+    }
+
+    onLevelComplete(player, endlevel) {
+      this.scene.start('GameScene'); // Replace 'NextLevelScene' with your actual next level scene key
     }
     
 }
