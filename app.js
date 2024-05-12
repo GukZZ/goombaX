@@ -38,8 +38,8 @@ app.use('/game', express.static(__dirname + '/Game'));
 // require passport auth
 require('./auth/auth');
 
-app.get('/game.html', passport.authenticate('jwt', { session : false }), function (req, res) {
-  res.sendFile(__dirname + '/public/game.html');
+app.get('/leaderboard.html', passport.authenticate('jwt', { session : false }), function (req, res) {
+  res.sendFile(__dirname + '/public/leaderboard.html');
 });
 
 app.use(express.static(__dirname + '/public'));

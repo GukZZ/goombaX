@@ -17,7 +17,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  highScore : {
+  bestTime : {
     type: Number,
     default: 0
   }
