@@ -87,6 +87,20 @@ class GameScene extends Phaser.Scene {
     
     this.physics.add.collider(this.player, this.endLevel, this.onLevelComplete.bind(this), null, this);
 
+    this.gameTimer = 0;
+    this.timerText = this.add.text(16, 16, 'Time: 0', { fontSize: '32px', fill: '#000' });
+    
+    // Start the timer
+    this.time.addEvent({
+      delay: 1000,
+      callback: () => {
+        this.gameTimer++;
+        this.timerText.setText('Time: ' + this.gameTimer);
+      },
+      callbackScope: this,
+      loop: true
+    });
+
   }
   
     update() {
@@ -125,11 +139,30 @@ class GameScene extends Phaser.Scene {
             duration: 100,
             ease: 'Linear',
             repeat: 5,
+            onComplete: () => {
+                // Restart the timer
+                this.gameTimer = 0;
+            }
         });
     }
 
     onLevelComplete(player, endlevel) {
       this.scene.start('GameScene'); // Replace 'NextLevelScene' with your actual next level scene key
-    }
-    
+      fetch('/submit-time', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: 'player@example.com', time: this.gameTimer }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        // Transition to the next level or restart the game scene
+        this.scene.start('GameScene');
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
 }

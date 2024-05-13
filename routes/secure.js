@@ -15,4 +15,10 @@ router.get('/times', asyncMiddleware(async (req, res, next) => {
   res.status(200).json(users);
 }));
 
+router.post('/submit-time', asyncMiddleware(async (req, res, next) => {
+  const { email, time } = req.body;
+  await UserModel.updateOne({ email }, { bestTime: time });
+  res.status(200).json({ status: 'ok' });
+}));
+
 module.exports = router;
