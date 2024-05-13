@@ -16,10 +16,9 @@ class Time extends Phaser.Scene {
   create() {
     this.add.bitmapText(100, 110, 'arcade', 'RANK  TIME   NAME').setTint(0xffffff);
 
-    for (let i = 1; i < 6; i++) {
-      if (bestTime[i-1]) {
-        // Assuming times are stored in a format or unit that can be directly displayed
-        this.add.bitmapText(100, 160 + 50 * i, 'arcade', ` ${i}      ${bestTime[i-1].time}    ${bestTime[i-1].name}`).setTint(0xffffff);
+    for (let i = 1; i <= times.length; i++) {
+      if (times[i-1]) {
+        this.add.bitmapText(100, 160 + 50 * i, 'arcade', ` ${i}      ${times[i-1].bestTime}    ${times[i-1].name}`).setTint(0xffffff);
       } else {
         this.add.bitmapText(100, 160 + 50 * i, 'arcade', ` ${i}      ---    ---`).setTint(0xffffff);
       }
@@ -38,10 +37,10 @@ let config = {
 
 $.ajax({
   type: 'GET',
-  url: '/times', // Ensure this is the correct endpoint
+  url: '/times', // Correct endpoint
   success: function(data) {
     console.log("AJAX call successful. Data:", data);
-    times = data.sort((a, b) => a.time - b.time);
+    times = data; // Already sorted from the server
     game = new Phaser.Game(config);
   },
   error: function(xhr) {

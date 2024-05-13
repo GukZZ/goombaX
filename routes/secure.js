@@ -11,7 +11,7 @@ router.post('/submit-time', asyncMiddleware(async (req, res, next) => {
 }));
 
 router.get('/times', asyncMiddleware(async (req, res, next) => {
-  const users = await UserModel.find({}, 'name bestTime -_id').sort({ times: 1 }).limit(10);
+  const users = await UserModel.find({}, 'name bestTime -_id').sort({ bestTime: 1 }).limit(10);
   res.status(200).json(users);
 }));
 

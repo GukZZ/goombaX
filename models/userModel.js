@@ -19,7 +19,7 @@ const UserSchema = new Schema({
   },
   bestTime : {
     type: Number,
-    default: 0
+    default: 1000
   }
 });
 
