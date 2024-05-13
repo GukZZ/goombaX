@@ -37,4 +37,12 @@ router.post('/submit-time', asyncMiddleware(async (req, res, next) => {
   }
 }));
 
+router.get('/get-user-email', function(req, res) {
+  if (req.session && req.session.userEmail) {
+    res.json({ email: req.session.userEmail });
+  } else {
+    res.status(404).send('Email not found in session');
+  }
+});
+
 module.exports = router;

@@ -17,11 +17,15 @@ router.post('/login', async (req, res, next) => {
   passport.authenticate('login', async (err, user, info) => {
     try {
       if (err || !user) {
-        const error = new Error('An Error occured');
+        const error = new Error('An Error occurred');
         return next(error);
       }
       req.login(user, { session: false }, async (error) => {
         if (error) return next(error);
+
+        // Store user's email in session
+        req.session.userEmail = user.email; // Added line for session storage
+
         const body = {
           _id: user._id,
           email: user.email

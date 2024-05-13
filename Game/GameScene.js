@@ -146,17 +146,23 @@ class GameScene extends Phaser.Scene {
         });
     }
     onLevelComplete(player, endlevel) {
-      // Retrieve user email from local storage
-      const userEmail = localStorage.getItem('userEmail');
+      fetch('/get-user-email')
+      .then(response => response.json())
+      .then(data => {
+        if(data.email) {
+          this.submitTime(data.email);
+        } else {
+          console.error('No email found in session.');
+          this.scene.pause();
+          this.scene.launch('LoginScene');
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to fetch user email:', error);
+      });
+    }
     
-      if(!userEmail) {
-        console.error('User email not found in local storage.');
-        // Optionally, prompt the user to log in again or provide other UI/UX feedback
-        this.scene.pause(); // Pause the current scene
-        this.scene.launch('LoginScene'); // Assume you have a 'LoginScene' for user login
-        return; // Exit the function if userEmail is not found
-      }
-    
+    submitTime(userEmail) {
       fetch('/submit-time', {
         method: 'POST',
         headers: {
@@ -167,13 +173,10 @@ class GameScene extends Phaser.Scene {
       .then(response => response.json())
       .then(data => {
           console.log('Success:', data);
-          // Handle success response
           if(data.error) {
               console.error('Error:', data.error);
-              // Handle error (e.g., user not found or server error)
           } else {
-              // Proceed with level completion or showing success message
-              this.scene.start('NextLevelScene'); // Adjust according to your game's flow
+              this.scene.start('NextLevelScene');
           }
       })
       .catch((error) => {

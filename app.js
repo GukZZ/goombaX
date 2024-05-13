@@ -12,7 +12,7 @@ const secureRoutes = require('./routes/secure');
 
 // setup mongo connection
 const uri = process.env.MONGO_CONNECTION_URL;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.on('error', (error) => {
   console.log(error);
   process.exit(1);
@@ -23,6 +23,15 @@ mongoose.connection.on('connected', function () {
 
 // create an instance of an express app
 const app = express();
+
+const session = require('express-session');
+   
+   app.use(session({
+     secret: 'yourSecretKey',
+     resave: false,
+     saveUninitialized: true,
+     cookie: { secure: false } // set to true if using https
+   }));
 
 // update express settings
 app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
