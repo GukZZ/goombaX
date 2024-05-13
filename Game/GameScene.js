@@ -145,24 +145,39 @@ class GameScene extends Phaser.Scene {
             }
         });
     }
-
     onLevelComplete(player, endlevel) {
-      this.scene.start('GameScene'); // Replace 'NextLevelScene' with your actual next level scene key
+      // Retrieve user email from local storage
+      const userEmail = localStorage.getItem('userEmail');
+    
+      if(!userEmail) {
+        console.error('User email not found in local storage.');
+        // Optionally, prompt the user to log in again or provide other UI/UX feedback
+        this.scene.pause(); // Pause the current scene
+        this.scene.launch('LoginScene'); // Assume you have a 'LoginScene' for user login
+        return; // Exit the function if userEmail is not found
+      }
+    
       fetch('/submit-time', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: 'player@example.com', time: this.gameTimer }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-        // Transition to the next level or restart the game scene
-        this.scene.start('GameScene');
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
+        body: JSON.stringify({ email: userEmail, time: this.gameTimer }),
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log('Success:', data);
+          // Handle success response
+          if(data.error) {
+              console.error('Error:', data.error);
+              // Handle error (e.g., user not found or server error)
+          } else {
+              // Proceed with level completion or showing success message
+              this.scene.start('NextLevelScene'); // Adjust according to your game's flow
+          }
+      })
+      .catch((error) => {
+          console.error('Network or server error:', error);
+      });
+    }
 }
