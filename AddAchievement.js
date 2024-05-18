@@ -16,8 +16,8 @@ db.once('open', async function() {
 
     // Создание нового достижения
     const newAchievement = new Achievement({
-      achievement: "Win!", // Исправлено на маленькую букву согласно схеме
-      description: "First Win",
+      achievement: "CZX!", // Исправлено на маленькую букву согласно схеме
+      description: "ZXC",
       usersUnlocked: [] // Изначально ни один пользователь не разблокировал это достижение
     });
 

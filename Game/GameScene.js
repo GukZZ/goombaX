@@ -187,17 +187,12 @@ class GameScene extends Phaser.Scene {
         credentials: 'include', // Necessary for including session cookies
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({
+          // Assuming the server expects an achievement ID; replace 'your_achievement_id_here' with the actual ID
+          achievementId: '6649119fb7f6d839709f1366'
+        })
       })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => console.log(data))
-      .catch(error => console.error('Error:', error));
-
     }
     
     submitTime(userEmail) {

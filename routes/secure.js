@@ -48,31 +48,31 @@ router.get('/get-user-email', function(req, res) {
 router.post('/unlock-achievement', async (req, res) => {
   try {
     const playerId = req.session.playerId; // Extract player ID from session
-    const achievementId = '6649119fb7f6d839709f1366'; // The specific achievement ID you're targeting
+    if (!playerId) {
+      return res.status(400).json({ message: 'Player ID missing from session' });
+    }
+    const achievementId = req.body.achievementId; // Use provided achievement ID or fallback to a specific one
 
     const achievement = await Achievement.findById(achievementId);
 
     if (!achievement) {
-      return res.status(404).send('Achievement not found');
+      return res.status(404).json({ message: 'Achievement not found' });
     }
 
     const userUnlocked = achievement.usersUnlocked.find(u => u.user.toString() === playerId);
 
     if (!userUnlocked) {
-      // Add the player ID to the 'usersUnlocked' array with unlocked status
       achievement.usersUnlocked.push({ user: playerId, unlocked: true });
-      
-      // Optionally, if you want to mark the entire achievement as unlocked once any user unlocks it
       achievement.unlocked = true;
 
-      await achievement.save(); // Persist changes to the database
-      res.send('Achievement unlocked');
+      await achievement.save();
+      res.json({ message: 'Achievement unlocked' });
     } else {
-      res.status(400).send('Player has already unlocked this achievement');
+      res.status(400).json({ message: 'Player has already unlocked this achievement' });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error');
+    res.status(500).send({ message: 'Server error' });
   }
 });
 
