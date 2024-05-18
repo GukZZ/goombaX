@@ -25,6 +25,7 @@ router.post('/login', async (req, res, next) => {
 
         // Store user's email in session
         req.session.userEmail = user.email; // Added line for session storage
+        req.session.playerId = user._id;
 
         const body = {
           _id: user._id,

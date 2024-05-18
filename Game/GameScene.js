@@ -181,6 +181,23 @@ class GameScene extends Phaser.Scene {
       .catch((error) => {
         console.error('Failed to fetch user email:', error);
       });
+
+      fetch('/unlock-achievement', {
+        method: 'POST',
+        credentials: 'include', // Necessary for including session cookies
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+
     }
     
     submitTime(userEmail) {
@@ -204,4 +221,7 @@ class GameScene extends Phaser.Scene {
           console.error('Network or server error:', error);
       });
     }
+
+
+
 }
