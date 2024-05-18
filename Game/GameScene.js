@@ -124,6 +124,7 @@ class GameScene extends Phaser.Scene {
         this.cameras.main.scrollX = lerpedX;
         this.cameras.main.scrollY = 0;
 
+        this.timerText.setPosition(this.player.x -  100, 0);
         
         if (this.cursors.left.isDown) {
             this.player.setVelocityX(-200);
@@ -190,7 +191,7 @@ class GameScene extends Phaser.Scene {
         },
         body: JSON.stringify({
           // Assuming the server expects an achievement ID; replace 'your_achievement_id_here' with the actual ID
-          achievementId: '6649119fb7f6d839709f1366'
+          achievementId: '66493bafddec0c5f77914c3d'
         })
       })
     }

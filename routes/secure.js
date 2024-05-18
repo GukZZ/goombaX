@@ -76,4 +76,37 @@ router.post('/unlock-achievement', async (req, res) => {
   }
 });
 
+router.get('/current_user', (req, res) => {
+  // Assuming you store user info in req.user when authenticating
+  if (req.user) {
+    res.json({ userId: req.user._id });
+  } else {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+});
+
+router.get('/current_user', (req, res) => {
+  // Assuming you store user info in req.user when authenticating
+  if (req.user) {
+    res.json({ userId: req.user._id });
+  } else {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+});
+
+router.get('/achievements/:userId', async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const achievements = await Achievement.find();
+    const userAchievements = achievements.map(achievement => ({
+      ...achievement.toJSON(),
+      isUnlocked: Boolean(achievement.usersUnlocked.find(u => u.user.toString() === userId))
+    }));
+    res.json(userAchievements);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+});
+
 module.exports = router;

@@ -16,8 +16,8 @@ db.once('open', async function() {
 
     // Создание нового достижения
     const newAchievement = new Achievement({
-      achievement: "CZX!", // Исправлено на маленькую букву согласно схеме
-      description: "ZXC",
+      achievement: "Я сосал хуй!", // Исправлено на маленькую букву согласно схеме
+      description: "Проглотил дохуя спермы!!!",
       usersUnlocked: [] // Изначально ни один пользователь не разблокировал это достижение
     });
 
