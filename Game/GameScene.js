@@ -16,8 +16,18 @@ class GameScene extends Phaser.Scene {
     this.player.setBounce(0.1);
     this.player.setCollideWorldBounds(true);
     this.physics.add.collider(this.player, platforms);
+
+    const lerpFactor = 0.1; // Adjust the value to control the smoothness (0.1 for slower, 1 for instant follow)
+    const cameraX = this.cameras.main.scrollX;
+    const cameraY = this.cameras.main.scrollY;
+    const targetX = this.player.x - this.cameras.main.width * 0.5;
+    const targetY = this.player.y - this.cameras.main.height * 0.5;
+    const lerpedX = Phaser.Math.Linear(cameraX, targetX, lerpFactor);
+    const lerpedY = Phaser.Math.Linear(cameraY, targetY, lerpFactor);
+    this.cameras.main.scrollX = lerpedX;
+    this.cameras.main.scrollY = lerpedY;
     
-    this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
+
   
   
     // Ensure the player is active and controllable
@@ -104,6 +114,17 @@ class GameScene extends Phaser.Scene {
   }
   
     update() {
+        const lerpFactor = 0.1; // Adjust the value to control the smoothness (0.1 for slower, 1 for instant follow)
+        const cameraX = this.cameras.main.scrollX;
+        const cameraY = this.cameras.main.scrollY;
+        const targetX = this.player.x - this.cameras.main.width * 0.5;
+        const targetY = this.player.y - this.cameras.main.height * 0.6;
+        const lerpedX = Phaser.Math.Linear(cameraX, targetX, lerpFactor);
+        const lerpedY = Phaser.Math.Linear(cameraY, targetY, lerpFactor);
+        this.cameras.main.scrollX = lerpedX;
+        this.cameras.main.scrollY = 0;
+
+        
         if (this.cursors.left.isDown) {
             this.player.setVelocityX(-200);
             this.player.play('walk', true);
@@ -176,7 +197,7 @@ class GameScene extends Phaser.Scene {
           if(data.error) {
               console.error('Error:', data.error);
           } else {
-              this.scene.start('NextLevelScene');
+              this.scene.start('GameScene');
           }
       })
       .catch((error) => {

@@ -22,14 +22,14 @@ body {
 
 body, h1, h2, h3, p, a {
   font-family: 'Press Start 2P', cursive;
-  color: rgb(39, 55, 204);
+  color: rgb(0, 0, 0);
   font-size: 16px; /* Adjust size as needed */
 }
 
 /* Example for larger and bolder headings */
 h1 {
   font-size: 32px; /* Bigger size for headings */
-  text-shadow: 3px 3px 0px #000c7456; /* Optional: adds a retro shadow effect */
+  text-shadow: 3px 3px 0px #49414128; /* Optional: adds a retro shadow effect */
 }
 
 .form-signin {
