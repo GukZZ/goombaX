@@ -6,8 +6,8 @@ class GameScene extends Phaser.Scene {
   create() {
     const map = this.make.tilemap({ key: 'map' });
     const tileset = map.addTilesetImage('kenney_simple_platformer', 'tiles');
-    const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0.15, 0);
-    backgroundImage.setScale(3.5, 0.8);
+    const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0.2, 0);
+    backgroundImage.setScale(4.2, 0.8);
     const platforms = map.createStaticLayer('Platforms', tileset, 0, 200);
     const Water = map.createStaticLayer('Water', tileset, 0, 200);
     platforms.setCollisionByExclusion(-1, true);
@@ -176,7 +176,6 @@ class GameScene extends Phaser.Scene {
         } else {
           console.error('No email found in session.');
           this.scene.pause();
-          this.scene.launch('LoginScene');
         }
       })
       .catch((error) => {
@@ -210,7 +209,7 @@ class GameScene extends Phaser.Scene {
           if(data.error) {
               console.error('Error:', data.error);
           } else {
-              this.scene.start('GameScene');
+            window.location.href = '../game-menu.html'
           }
       })
       .catch((error) => {
