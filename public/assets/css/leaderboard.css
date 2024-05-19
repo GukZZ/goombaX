@@ -1,0 +1,19 @@
+#leaderboard-container {
+    border: 2px solid #d2b48c; /* светло-коричневая обводка */
+    padding: 10px;
+}
+
+#leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#leaderboard-table th, #leaderboard-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#leaderboard-table th {
+    background-color: #f2f2f2;
+}

@@ -6,8 +6,8 @@ class GameScene extends Phaser.Scene {
   create() {
     const map = this.make.tilemap({ key: 'map' });
     const tileset = map.addTilesetImage('kenney_simple_platformer', 'tiles');
-    const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
-    backgroundImage.setScale(2, 0.8);
+    const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0.15, 0);
+    backgroundImage.setScale(3.5, 0.8);
     const platforms = map.createStaticLayer('Platforms', tileset, 0, 200);
     const Water = map.createStaticLayer('Water', tileset, 0, 200);
     platforms.setCollisionByExclusion(-1, true);
@@ -25,7 +25,7 @@ class GameScene extends Phaser.Scene {
     const lerpedX = Phaser.Math.Linear(cameraX, targetX, lerpFactor);
     const lerpedY = Phaser.Math.Linear(cameraY, targetY, lerpFactor);
     this.cameras.main.scrollX = lerpedX;
-    this.cameras.main.scrollY = lerpedY;
+    this.cameras.main.scrollY = 0;
     
 
   
@@ -191,7 +191,7 @@ class GameScene extends Phaser.Scene {
         },
         body: JSON.stringify({
           // Assuming the server expects an achievement ID; replace 'your_achievement_id_here' with the actual ID
-          achievementId: '66493bafddec0c5f77914c3d'
+          achievementId: '664a1003502004064c025f80'
         })
       })
     }

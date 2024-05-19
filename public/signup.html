@@ -5,10 +5,99 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Sign Up Page</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link href="assets/css/main.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style>
+    /* Основной стиль формы */
+    body {
+      background-color: #87CEEB; /* Голубой фон */
+      font-family: 'Courier New', monospace; /* Моноширинный шрифт */
+      color: #4B0082; /* Темно-синий текст */
+    }
+
+    .form-signin {
+      max-width: 400px;
+      padding: 20px;
+      margin: 50px auto;
+      background-color: #F4A460; /* Светло-коричневый фон */
+      border: 4px solid #D2691E; /* Коричневая обводка */
+      border-radius: 10px;
+      font-weight: bold; /* Жирный текст */
+    }
+
+    .form-signin .form-control {
+      width: 100%;
+      box-sizing: border-box;
+      height: 40px;
+      padding: 5px 10px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      border: 2px solid #8B4513; /* Темно-коричневая обводка */
+      background-color: #FFE4B5; /* Светлый фон для полей */
+      font-weight: bold; /* Жирный текст */
+      font-family: 'Courier New', monospace; /* Моноширинный шрифт */
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .button-group .btn {
+      font-size: 14px;
+      padding: 10px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      background-color: #4169E1; /* Синий фон кнопки */
+      border: 4px solid #00008B; /* Темно-синяя обводка */
+      color: #FFFFFF; /* Белый текст */
+      font-weight: bold; /* Жирный текст */
+      font-family: 'Courier New', monospace; /* Моноширинный шрифт */
+    }
+
+    .button-group .btn:hover {
+      background-color: #00008B; /* Темно-синий фон при наведении */
+      border-color: #4169E1; /* Светло-синяя обводка при наведении */
+    }
+
+    .button-group .btn-block {
+      display: block;
+      width: 100%;
+    }
+
+    /* Дополнительные стили */
+    .text-center {
+      text-align: center;
+    }
+
+    .font-weight-normal {
+      font-weight: 400;
+    }
+
+    .h3 {
+      font-size: 1.5rem;
+      font-family: 'Press Start 2P', cursive; /* Пиксельный шрифт для заголовка */
+    }
+
+    .link-container {
+      margin-top: 10px;
+      font-weight: bold; /* Жирный текст */
+    }
+
+    a {
+      color: #4B0082; /* Темно-синий цвет ссылок */
+      text-decoration: none;
+      font-weight: bold; /* Жирный текст */
+      font-family: 'Courier New', monospace; /* Моноширинный шрифт */
+    }
+
+    a:hover {
+      color: #00008B; /* Темно-синий цвет при наведении */
+    }
+  </style>
 </head>
 
 <body class="text-center">
@@ -20,38 +109,41 @@
     <input type="password" id="password" class="form-control" placeholder="Password" required>
     <label for="name" class="sr-only">Name</label>
     <input type="text" id="name" class="form-control" placeholder="Name" required>
-    <a class="btn btn-lg btn-primary btn-block" onClick="signUp()">Sign up</a>
-    <a href="/index.html">Already have an account? Login here.</a>
+    <div class="button-group">
+      <button type="button" class="btn btn-lg btn-primary btn-block" onClick="signUp()">Sign up</button>
+    </div>
+    <div class="link-container">
+      <a href="/index.html"><strong>Already have an account? Login here.</strong></a>
+    </div>
   </form>
   <script>
-   function signUp() {
-    var password = document.forms[0].elements[1].value;
-    if (password.length < 6) {
+    function signUp() {
+      var password = document.forms[0].elements[1].value;
+      if (password.length < 6) {
         window.alert("Пароль должен содержать не менее 6 символов.");
         return; // Выход из функции, если пароль не удовлетворяет условию
-    }
+      }
 
-    var data = {
+      var data = {
         email: document.forms[0].elements[0].value,
         password: password,
         name: document.forms[0].elements[2].value
-    };
+      };
 
-    $.ajax({
+      $.ajax({
         type: 'POST',
         url: '/signup',
         data,
         success: function (data) {
-            window.alert('Пользователь успешно создан.');
-            window.location.replace('/index.html');
+          window.alert('Пользователь успешно создан.');
+          window.location.replace('/index.html');
         },
         error: function (xhr) {
-            window.alert(JSON.stringify(xhr));
-            window.location.replace('/signup.html');
+          window.alert(JSON.stringify(xhr));
+          window.location.replace('/signup.html');
         }
-    });
-}
-
+      });
+    }
   </script>
 </body>
 

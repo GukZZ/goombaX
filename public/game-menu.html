@@ -5,7 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Menu</title>
     <link rel="stylesheet" href="assets/css/game-menu.css">
-    <link href=&quot;https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&quot; rel=&quot;stylesheet&quot;>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Основной стиль меню */
+        body {
+            background-color: #87CEEB; /* Голубой фон */
+            font-family: 'Courier New', monospace; /* Моноширинный шрифт */
+            color: #4B0082; /* Темно-синий текст */
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-family: 'Press Start 2P', cursive; /* Пиксельный шрифт для заголовка */
+            margin-bottom: 30px;
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            margin: 10px;
+            border: 4px solid #00008B; /* Темно-синяя обводка */
+            background-color: #4169E1; /* Синий фон кнопки */
+            color: #FFFFFF; /* Белый текст */
+            font-weight: bold; /* Жирный текст */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace; /* Моноширинный шрифт */
+        }
+
+        button:hover {
+            background-color: #00008B; /* Темно-синий фон при наведении */
+            border-color: #4169E1; /* Светло-синяя обводка при наведении */
+        }
+    </style>
 </head>
 <body>
     <div class="menu-container">
