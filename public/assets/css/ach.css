@@ -1,10 +1,78 @@
+/* Стиль для блока достижения */
 .achievement {
-    border: 1px solid #ccc;
+    background-color: #f46a608e; /* Светло-коричневый фон */
+    border: 4px solid #D2691E; /* Коричневая обводка */
     margin-bottom: 10px;
     padding: 10px;
+    font-family: 'Press Start 2P', cursive; /* Моноширинный шрифт */
+    font-weight: bold; /* Жирный шрифт */
+    color: #000000; /* Темно-синий текст */
+    border-radius: 8px; /* Скругленные углы */
 }
 
+
+/* Стиль для разблокированных достижений */
 .unlocked {
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
+    background-color: #68cf87c9; /* Светло-синий фон для разблокированных достижений */
+    border: 4px solid #D2691E; /* Коричневая обводка */
+    font-family: 'Press Start 2P', cursive; /* Моноширинный шрифт */
+    font-weight: bold; /* Жирный шрифт */
+    color: #000000; /* Белый текст */
+}
+
+/* Добавляем стиль для контейнера, если требуется */
+.achievements-container {
+    background-color:#F4A460; /* Коричневый фон контейнера */
+    border: 2px solid #D2691E; /* Коричневая обводка */
+    padding: 20px;
+    border-radius: 8px; /* Скругленные углы */
+    box-shadow: 4px 4px 0 #D2691E; /* Тень для 8-bit эффекта */
+}
+
+body {
+    background-color: #87CEEB; /* Light blue background similar to other pages */
+    font-family: 'Press Start 2P', cursive; /* Retro pixel font for consistency */
+    color: #000000; /* Dark blue text for consistency */
+    background-image: url('https://kartinkis.cdnbro.com/posts/24216135-fony-s-pikseliami-51.jpg'); /* Adjusted path */
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Press Start 2P', cursive; /* Моноширинный шрифт */
+    color: #ffffff; /* Темно-синий текст */
+    margin: 1000;
+    padding: 0;
+    font-size: 32px; /* Bigger size for headings */
+    text-shadow: 3px 3px 0px #000000; /* Optional: adds a retro shadow effect */
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://kartinkis.cdnbro.com/posts/24216135-fony-s-pikseliami-51.jpg'); /* Adjusted path */
+    background-size: cover;
+    background-position: center;
+}
+
+button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 10px;
+    border: 2px solid #00008B; /* Dark blue border */
+    background-color: #4169E1; /* Blue background */
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #00008B; /* Dark blue background on hover */
+    border-color: #4169E1; /* Blue border on hover */
 }

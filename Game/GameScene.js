@@ -217,6 +217,25 @@ class GameScene extends Phaser.Scene {
       });
     }
 
-
-
+    checkAndNotifyAchievement(achievementId) {
+      fetch('/unlock-achievement', {
+          method: 'POST',
+          credentials: 'include', // Necessary for including session cookies
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ achievementId: achievementId })
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.message === 'Achievement unlocked') {
+              this.showAchievementNotification('Achievement Unlocked!');
+          } else if (data.message === 'Player has already unlocked this achievement') {
+              // Player already has this achievement, do not show notification
+              console.log('Achievement already unlocked.');
+          }
+      })
+      .catch(error => console.error('Error unlocking achievement:', error));
+  }
+  
 }

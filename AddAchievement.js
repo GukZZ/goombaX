@@ -16,8 +16,8 @@ db.once('open', async function() {
 
     // Создание нового достижения
     const newAchievement = new Achievement({
-      achievement: "Победа!", // Исправлено на маленькую букву согласно схеме
-      description: "Вы прошли игру в 1 раз!",
+      achievement: "!@3213", // Исправлено на маленькую букву согласно схеме
+      description: "*&(@&*!%!@#",
       usersUnlocked: [] // Изначально ни один пользователь не разблокировал это достижение
     });
 

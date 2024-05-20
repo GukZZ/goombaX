@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 achievementDiv.innerHTML = `
                     <h3>${achievement.achievement}</h3>
                     <p>${achievement.description}</p>
-                    <p>${achievement.isUnlocked ? 'Ачивка выполнена!' : 'Ачивка не выполнена:('}</p>
+                    <p>${achievement.isUnlocked ? 'Достижение получено!' : 'Достижение не получено:('}</p>
                 `;
                 achievementsContainer.appendChild(achievementDiv);
             });
