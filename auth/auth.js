@@ -11,6 +11,18 @@ passport.use('signup', new localStrategy({
   passReqToCallback: true
 }, async (req, email, password, done) => {
   try {
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return done(null, false, { message: 'Invalid email format' });
+    }
+
+    // Check if email already exists
+    const existingUser = await UserModel.findOne({ email });
+    if (existingUser) {
+      return done(null, false, { message: 'Email already in use' });
+    }
+
     const { name } = req.body;
     const user = await UserModel.create({ email, password, name});
     return done(null, user);

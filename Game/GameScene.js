@@ -6,15 +6,19 @@ class GameScene extends Phaser.Scene {
   create() {
     const map = this.make.tilemap({ key: 'map' });
     const tileset = map.addTilesetImage('kenney_simple_platformer', 'tiles');
-    const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0.2, 0);
-    backgroundImage.setScale(4.2, 0.8);
+    const backstena = this.add.image(0, 0, 'backstena').setOrigin(0.6, 0);
+    backstena.setScale(0.7, 1.2);
+    const backgroundImage = this.add.image(860, 0, 'background').setOrigin(0.2, 0.4);
+    backgroundImage.setScale(7, 1.5);
     const platforms = map.createStaticLayer('Platforms', tileset, 0, 200);
     const Water = map.createStaticLayer('Water', tileset, 0, 200);
     platforms.setCollisionByExclusion(-1, true);
     
-    this.player = this.physics.add.sprite(50, 300, 'player');
-    this.player.setBounce(0.1);
-    this.player.setCollideWorldBounds(true);
+this.player = this.physics.add.sprite(1250, 250, 'player');
+this.player.setBounce(0.1);
+this.player.setCollideWorldBounds(true);
+// Adjust the size of the player's physics body
+this.player.body.setSize(40, 90, true);
     this.physics.add.collider(this.player, platforms);
 
     const lerpFactor = 0.1; // Adjust the value to control the smoothness (0.1 for slower, 1 for instant follow)
@@ -75,14 +79,14 @@ class GameScene extends Phaser.Scene {
 
     map.getObjectLayer('Spikes').objects.forEach((spike) => {
       const spikeSprite = this.spikes.create(spike.x, spike.y + 200 - spike.height, 'spike').setOrigin(0);
-      spikeSprite.body.setSize(spike.width, spike.height - 20).setOffset(0, 20);
+      spikeSprite.body.setSize(spike.width, spike.height - 20).setOffset(0, 30);
     });
     
     this.physics.add.collider(this.player, this.spikes, this.playerHit.bind(this), null, this);
 
     map.getObjectLayer('voda').objects.forEach((voda) => {
       const vodaSprite = this.voda.create(voda.x, voda.y + 200 - voda.height, 'voda').setOrigin(0);
-      vodaSprite.body.setSize(voda.width, voda.height - 20).setOffset(0, 20);
+      vodaSprite.body.setSize(voda.width, voda.height - 20).setOffset(0, 1);
     });
 
     this.physics.add.collider(this.player, this.voda, this.playerHit.bind(this), null, this);
@@ -149,8 +153,8 @@ class GameScene extends Phaser.Scene {
     playerHit(player, spike) {
         // Обработка столкновения игрока с опасным объектом
         player.setVelocity(0, 0);
-        player.setX(50);
-        player.setY(300);
+        player.setX(1250);
+        player.setY(250);
         player.play('idle', true);
         player.setAlpha(0);
 

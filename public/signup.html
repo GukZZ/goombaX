@@ -138,10 +138,10 @@
           window.alert('Пользователь успешно создан.');
           window.location.replace('/index.html');
         },
-        error: function (xhr) {
-          window.alert(JSON.stringify(xhr));
-          window.location.replace('/signup.html');
-        }
+        error: function (xhr, status, error) {
+  var errorMessage = xhr.status + ': ' + xhr.statusText
+  alert('Неверный e-mail и (или) пароль!');
+}
       });
     }
   </script>
