@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Checking Database Connection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #87CEEB;
+      font-family: 'Press Start 2P', cursive;
+      color: #FFFFFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Ожидание подключения базы данных...</h1>
+  </div>
+
+  <script>
+    (function() {
+        function checkDatabaseConnection() {
+            fetch('/check-db-connection')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.connected) {
+                        window.location.replace('/index.html');
+                    }
+                })
+                .catch(() => {
+                    // Optionally, handle fetch errors here
+                });
+        }
+
+        setInterval(checkDatabaseConnection, 500); // Check every 5 seconds
+    })();
+  </script>
+</body>
+</html>

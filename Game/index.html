@@ -26,4 +26,29 @@
   <script src="./GameScene.js"></script>
   <script src="./NextLevel.js"></script>
   <script src="./game.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  function checkDatabaseConnection() {
+    $.ajax({
+      type: 'GET',
+      url: '/check-db-connection',
+      success: function (data) {
+        if (!data.connected) {
+          window.location.replace('/checkdb.html');
+        } else {
+          setTimeout(checkDatabaseConnection, 100); // Check every 100ms
+        }
+      },
+      error: function () {
+        window.location.replace('/checkdb.html');
+      }
+    });
+  }
+
+  $(document).ready(function () {
+    checkDatabaseConnection();
+    setInterval(checkDatabaseConnection, 100); // Check every 100ms
+  });
+</script>
+
 </html>
